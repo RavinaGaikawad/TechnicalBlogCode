@@ -1,22 +1,10 @@
 from openai import OpenAI
 import json
 
-# Function to read the API key from a file
-def read_api_key(file_path='api_key.txt'):
-    try:
-        with open(file_path, 'r') as file:
-            api_key = file.read().strip()
-        return api_key
-    except FileNotFoundError:
-        print(f"Error: The file '{file_path}' was not found.")
-        return None
-
-# Read the API key from the file
-api_key = read_api_key()
-client = OpenAI(api_key=api_key)
+client = OpenAI(api_key="<your_api_key>")
 
 # Load the museums JSON data
-with open('museums_data.json', 'r') as file:
+with open('national_parks_data.json', 'r') as file:
     museums_data = json.load(file)
 
 # Function to ask ChatGPT
@@ -29,7 +17,7 @@ def ask_chatgpt(prompt, context):
         model="gpt-3.5-turbo",  # GPT-3.5 Turbo model
         messages=[
             {"role": "system",
-             "content": "You are museum expert based out of chicago. I want you to respond" 
+             "content": "You are national parks expert based out of united states. I want you to respond" 
              "to the user questions by referring the data file. If it doesn't have the information "
              "don't make it up. Say you don't know. I want you to answer these questions to the best "
              "of your ability by referencing the data."},
@@ -43,7 +31,7 @@ def ask_chatgpt(prompt, context):
 
 # Function to interact with the chatbot
 def main():
-    print("Welcome to the Museum Chatbot! Ask me anything!")
+    print("Welcome to the National Park Chatbot! Ask me anything!")
     
     while True:
         # Get user input from the terminal
